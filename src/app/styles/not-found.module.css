@@ -1,0 +1,44 @@
+.main {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: #fff;
+    width: 100vw;
+    height: 100vh;
+}
+
+.card {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 50%;
+    height: 50%;
+    background-color: #ff0000;
+    border-color: #fff;
+}
+
+.title {
+    margin-top: 6%;
+    color: #fff;
+    font-size: 24px;
+    font-weight: bolder;
+}
+
+.description {
+    color: #fff;
+    font-size: 24px;
+    font-weight: bolder;
+}
+
+.status {
+    color: #fff;
+    font-size: 24px;
+    font-weight: bolder;
+}
+
+.buttonHome {
+    width: 12%;
+    height: 12%;
+    margin-top: 4%;
+}
