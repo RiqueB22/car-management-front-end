@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth/next";
 import { redirect } from "next/navigation";
 import { authOptions } from "@/app/api/auth/[...nextauth]/route";
-import Home from "@/features/auth/components/home/homePage";
+import RegisterPage from "@/features/auth/components/userRegister/UserRegister";
 
 export default async function Page() {
   // Busca a sessão no servidor
@@ -11,8 +11,8 @@ export default async function Page() {
     redirect("/");
   }
 
-  // Retorna a pagina Home
+  // Retorna a pagina Registro de usuario
   return (
-    <Home />
+    <RegisterPage />
   );
 }

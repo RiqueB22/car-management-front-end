@@ -1,0 +1,16 @@
+.image {
+    display: flex;
+    width: 30px;
+    height: 30px;
+    align-items: center;
+    justify-content: center;
+}
+
+.image:hover {
+    background-color: lightgray;
+    border-radius: 20%;
+}
+
+.image:active {
+    background-color: #fff;
+}

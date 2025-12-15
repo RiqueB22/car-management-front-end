@@ -62,3 +62,21 @@ NextAuth:
 $ npm install next-auth
 ```
 
+## GenerateKey Command
+```bash
+$ node -e "console.log(require('crypto').randomBytes(32).toString('hex'))"
+```
+
+
+## .env
+
+```bash
+#NextAuth secret (para JWT e cookies)
+NEXTAUTH_SECRET=
+
+#URL da minha aplicação
+NEXTAUTH_URL=
+
+#URL do backend
+NEXT_PUBLIC_BACK_URL=
+```
