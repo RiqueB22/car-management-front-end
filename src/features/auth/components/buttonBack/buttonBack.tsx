@@ -8,10 +8,12 @@ import leftarrow from "../../../../../public/assets/leftarrow.png";
 
 export default function ButtonBack() {
     const router = useRouter();
+    //Volta para a pagina anterior
     const handleVoltar = () => {
         router.back(); // volta para a página anterior
     };
 
+    // Retorna botão voltar
     return (
         <Button onClick={handleVoltar} className={styles.image}>
             <Image src={leftarrow} width={20} height={20} alt="retorno" />

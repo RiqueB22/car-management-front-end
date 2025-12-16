@@ -1,6 +1,5 @@
 'use client';
 
-import { useRouter } from "next/navigation";
 import * as z from "zod";
 import { SchemaCar } from "../../schemas/schemaCar";
 import { zodResolver } from "@hookform/resolvers/zod";
@@ -23,12 +22,11 @@ import { CarGetByIdPageProps } from "@/utils/CarGetByIdProps";
 import ButtonEdit from "../button edit/button edit";
 import ButtonBack from "../buttonBack/buttonBack";
 
-// Inferindo tipo do Zod
+// Inferindo o esquema
 type CarFormData = z.infer<typeof SchemaCar>;
 
 export default function CarGetByIdPage({ Data }: CarGetByIdPageProps) {
-    const router = useRouter();
-
+    // Informando os valores padrões e as validações
     const form = useForm<CarFormData>({
         resolver: zodResolver(SchemaCar),
         defaultValues: {
@@ -42,20 +40,28 @@ export default function CarGetByIdPage({ Data }: CarGetByIdPageProps) {
     });
 
     return (
+        //Container de detalhes de carro
         <div className={styles.container}>
             <ToastContainer />
+            {/*Card*/}
             <Card className={styles.card}>
+                {/*Header do card*/}
                 <section className={styles.header}>
+                    {/*Botão voltar*/}
                     <div className={styles.imageLink}>
                         <ButtonBack />
                     </div>
+                    {/*Cabeçalho*/}
                     <CardHeader className={styles.headerCard}>
                         <CardTitle className={styles.title}>Detalhes do carro</CardTitle>
                     </CardHeader>
                 </section>
+                {/*Conteudo do card*/}
                 <CardContent className={styles.contantCard}>
+                    {/*Form*/}
                     <Form {...form}>
                         <form className={styles.form}>
+                            {/*Campo modelo*/}
                             <FormField
                                 control={form.control}
                                 name="modelo"
@@ -70,6 +76,7 @@ export default function CarGetByIdPage({ Data }: CarGetByIdPageProps) {
                                 )}
                             />
 
+                            {/*Campo marca*/}
                             <FormField
                                 control={form.control}
                                 name="marca"
@@ -84,6 +91,7 @@ export default function CarGetByIdPage({ Data }: CarGetByIdPageProps) {
                                 )}
                             />
 
+                            {/*Campo cor*/}
                             <FormField
                                 control={form.control}
                                 name="cor"
@@ -98,6 +106,7 @@ export default function CarGetByIdPage({ Data }: CarGetByIdPageProps) {
                                 )}
                             />
 
+                            {/*Campo ano*/}
                             <FormField
                                 control={form.control}
                                 name="ano"
@@ -112,6 +121,7 @@ export default function CarGetByIdPage({ Data }: CarGetByIdPageProps) {
                                 )}
                             />
 
+                            {/*Campo data de criação*/}
                             <FormField
                                 control={form.control}
                                 name="created_at"
@@ -126,6 +136,7 @@ export default function CarGetByIdPage({ Data }: CarGetByIdPageProps) {
                                 )}
                             />
 
+                            {/*Campo de ativo*/}
                             <FormField
                                 control={form.control}
                                 name="ativo"
@@ -139,6 +150,7 @@ export default function CarGetByIdPage({ Data }: CarGetByIdPageProps) {
                                 )}
                             />
 
+                            {/*Botão que direciona para pagina de edição*/}
                             <ButtonEdit id={Data.id} />
                         </form>
                     </Form>

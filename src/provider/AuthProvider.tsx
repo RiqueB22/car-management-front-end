@@ -10,5 +10,6 @@ interface Props {
 }
 
 export default function AuthProvider({ children, session }: Props) {
+  //retorna a sessão
   return <SessionProvider session={session}>{children}</SessionProvider>;
 }

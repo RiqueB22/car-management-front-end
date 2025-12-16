@@ -3,7 +3,6 @@
 import { useRouter } from "next/navigation";
 import * as z from "zod";
 import { SchemaCreateCar } from "../../schemas/schemaCreateCar";
-import { SchemaCar } from "../../schemas/schemaCar";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { useForm } from "react-hook-form";
 import { toast, ToastContainer } from "react-toastify";
@@ -26,9 +25,8 @@ import { useMutation, useQueryClient } from "@tanstack/react-query";
 import createCar from "../../actions/CreateCar";
 import { Session } from "next-auth";
 
-// Inferindo tipo do Zod
+// Inferindo o esquema
 type CarCreateFormData = z.infer<typeof SchemaCreateCar>;
-type CarFormData = z.infer<typeof SchemaCar>;
 
 interface SessionProps {
     session: Session
@@ -38,6 +36,7 @@ export default function CarCreatePage({ session }: SessionProps) {
     const router = useRouter();
     const queryClient = useQueryClient();
 
+    // informando valores padrões e validações
     const form = useForm<CarCreateFormData>({
         resolver: zodResolver(SchemaCreateCar),
         defaultValues: {
@@ -49,6 +48,7 @@ export default function CarCreatePage({ session }: SessionProps) {
         }
     });
 
+    // Registra um novo carro
     const mutation = useMutation({
         mutationFn: (data: CarCreateFormData) => createCar(data, session),
         onSuccess: () => {
@@ -63,25 +63,34 @@ export default function CarCreatePage({ session }: SessionProps) {
         },
     });
 
+    //Submetendo o forms
     const onSubmit = async (values: CarCreateFormData) => {
         mutation.mutate(values);
     };
 
     return (
+        // Container de criação de carro
         <div className={styles.container}>
             <ToastContainer />
+            {/*Card*/}
             <Card className={styles.card}>
+                {/*Header do card*/}
                 <section className={styles.header}>
+                    {/*Botão voltar*/}
                     <div className={styles.imageLink}>
                         <ButtonBack />
                     </div>
+                    {/*Cabeçalho*/}
                     <CardHeader className={styles.headerCard}>
                         <CardTitle className={styles.title}>Criar</CardTitle>
                     </CardHeader>
                 </section>
+                {/*Conteudo do card*/}
                 <CardContent className={styles.contantCard}>
+                    {/*Forms*/}
                     <Form {...form}>
                         <form className={styles.form} onSubmit={form.handleSubmit(onSubmit)}>
+                            {/*Campo modelo*/}
                             <FormField
                                 control={form.control}
                                 name="modelo"
@@ -96,6 +105,7 @@ export default function CarCreatePage({ session }: SessionProps) {
                                 )}
                             />
 
+                            {/*Campo marca*/}
                             <FormField
                                 control={form.control}
                                 name="marca"
@@ -110,6 +120,7 @@ export default function CarCreatePage({ session }: SessionProps) {
                                 )}
                             />
 
+                            {/*Campo cor*/}
                             <FormField
                                 control={form.control}
                                 name="cor"
@@ -124,6 +135,7 @@ export default function CarCreatePage({ session }: SessionProps) {
                                 )}
                             />
 
+                            {/*Campo ano*/}
                             <FormField
                                 control={form.control}
                                 name="ano"
@@ -142,6 +154,7 @@ export default function CarCreatePage({ session }: SessionProps) {
                                 )}
                             />
 
+                            {/*Campo ativo*/}
                             <FormField
                                 control={form.control}
                                 name="ativo"
@@ -155,6 +168,7 @@ export default function CarCreatePage({ session }: SessionProps) {
                                 )}
                             />
 
+                            {/*Botão submit*/}
                             <Button type="submit" disabled={mutation.isPending} className={styles.buttonSubmit}>
                                 {mutation.isPending ? "Registrando..." : "Registrar"}
                             </Button>

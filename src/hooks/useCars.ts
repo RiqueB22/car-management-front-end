@@ -5,21 +5,31 @@ export function useCars(filters: { modelo?: string; marca?: string; }, page: num
   const { data: session, status } = useSession();
 
   return useQuery({
-    queryKey: ["carros", JSON.stringify(filters), page, size],  // chave única para filtros
+    queryKey: ["carros", JSON.stringify(filters), page, size],
     queryFn: async () => {
       if (!session?.user?.token) throw new Error("Usuário não autenticado");
-      const res = await fetch(`http://localhost:8080/api/v1/carros/search?page=${page}&size=${size}`, {
+      //Busca os carros
+      const res = await fetch(`${process.env.NEXT_PUBLIC_BACK_URL}/api/v1/carros/search?page=${page}&size=${size}`, {
         method: "POST",
-        headers: { "Content-Type": "application/json",
+        headers: {
+          "Content-Type": "application/json",
           "Authorization": `Bearer ${session?.user?.token}`,
         },
         body: JSON.stringify(filters),
       });
 
-      if (!res.ok) throw new Error("Erro ao carregar carros");
+      // Verifica se está ok
+      if (!res.ok) {
+        // Tenta extrair mensagem de erro
+        const text = await res.text();
+        console.error("Erro ao carregar carro:", res.status, text);
+        throw new Error(`Erro ao carregar carro: ${res.status} ${text}`);
+      }
+
+      // Retorna response
       return res.json();
     },
-    placeholderData: (prev) => prev, // mantém dados antigos enquanto busca novos
+    placeholderData: (prev) => prev,
     enabled: status === "authenticated",
   });
 }

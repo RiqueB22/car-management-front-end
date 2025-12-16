@@ -1,5 +1,6 @@
 import { Session } from "next-auth";
 
+// DTO edit page
 export interface CarEditPageProps {
   Data: {
     id: string;

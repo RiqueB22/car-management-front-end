@@ -1,5 +1,6 @@
 import * as z from "zod";
 
+//Validação feita pelo zod
 export const SchemaUser = z.object({
   nome: z.string().min(2, "Nome obrigatório"),
   email: z.string().email("E-mail inválido"),

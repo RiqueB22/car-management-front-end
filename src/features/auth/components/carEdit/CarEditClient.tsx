@@ -25,13 +25,14 @@ import styles from "./style.module.css";
 import { CarEditPageProps } from "@/utils/CarEditPageProps";
 import ButtonBack from "../buttonBack/buttonBack";
 
-// Inferindo tipo do Zod
+// Inferindo o esquema
 type CarFormData = z.infer<typeof SchemaCreateCar>;
 
 export default function CarEditPage({ Data, session }: CarEditPageProps) {
   const router = useRouter();
   const queryClient = useQueryClient();
 
+  // Atualiza o dado
   const mutation = useMutation({
     mutationFn: (formData: CarFormData) => updateCar(Data.id, formData, session),
     onSuccess: () => {
@@ -44,6 +45,7 @@ export default function CarEditPage({ Data, session }: CarEditPageProps) {
     }
   });
 
+  // Informa os valores padrões e as validações
   const form = useForm<CarFormData>({
     resolver: zodResolver(SchemaCreateCar),
     defaultValues: {
@@ -55,25 +57,34 @@ export default function CarEditPage({ Data, session }: CarEditPageProps) {
     }
   });
 
+  // Submetendo o forms
   const onSubmit = async (values: CarFormData) => {
     mutation.mutate(values);
   };
 
   return (
+    // Container de edição de carro
     <div className={styles.container}>
       <ToastContainer />
+      {/*Card*/}
       <Card className={styles.card}>
+        {/*Header do card*/}
         <section className={styles.header}>
+          {/*Botão voltar*/}
           <div className={styles.imageLink}>
             <ButtonBack />
           </div>
+          {/*Cabeçalho*/}
           <CardHeader className={styles.headerCard}>
             <CardTitle className={styles.title}>Editar</CardTitle>
           </CardHeader>
         </section>
+        {/*Conteudo do card*/}
         <CardContent className={styles.contantCard}>
+          {/*Forms*/}
           <Form {...form}>
             <form className={styles.form} onSubmit={form.handleSubmit(onSubmit)}>
+              {/*Campo modelo*/}
               <FormField
                 control={form.control}
                 name="modelo"
@@ -88,6 +99,7 @@ export default function CarEditPage({ Data, session }: CarEditPageProps) {
                 )}
               />
 
+              {/*Campo marca*/}
               <FormField
                 control={form.control}
                 name="marca"
@@ -102,6 +114,7 @@ export default function CarEditPage({ Data, session }: CarEditPageProps) {
                 )}
               />
 
+              {/*Campo cor*/}
               <FormField
                 control={form.control}
                 name="cor"
@@ -116,6 +129,7 @@ export default function CarEditPage({ Data, session }: CarEditPageProps) {
                 )}
               />
 
+              {/*Campo ano*/}
               <FormField
                 control={form.control}
                 name="ano"
@@ -130,6 +144,7 @@ export default function CarEditPage({ Data, session }: CarEditPageProps) {
                 )}
               />
 
+              {/*Campo ativo*/}
               <FormField
                 control={form.control}
                 name="ativo"
@@ -143,6 +158,7 @@ export default function CarEditPage({ Data, session }: CarEditPageProps) {
                 )}
               />
 
+              {/*Botão submit*/}
               <Button type="submit" disabled={mutation.isPending} className={styles.buttonSubmit}>
                 {mutation.isPending ? "Atualizando..." : "Atualizar"}
               </Button>

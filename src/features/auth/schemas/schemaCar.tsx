@@ -1,5 +1,6 @@
 import * as z from "zod";
 
+//Validação feita pelo zod
 export const SchemaCar = z.object({
   modelo: z.string().min(2, "Modelo obrigatório"),
   marca: z.string().min(2, "Marca obrigatório"),

@@ -1,3 +1,5 @@
+
+// DTO get by id page
 export interface CarGetByIdPageProps {
   Data: {
     id: string;

@@ -25,7 +25,7 @@ import registerUser, { RegisterPayload } from "@/features/auth/actions/RegisterU
 import "react-toastify/dist/ReactToastify.css";
 import ButtonBack from "../buttonBack/buttonBack";
 
-// Inferindo tipo do Zod
+// Inferindo o esquema
 type RegisterFormData = z.infer<typeof SchemaUser>;
 
 export default function RegisterPage() {
@@ -38,6 +38,7 @@ export default function RegisterPage() {
     defaultValues: { ativo: true, role: "USER" },
   });
 
+  // Subnetendo o forms
   const onSubmit = async (data: RegisterFormData) => {
     try {
       setIsSubmitting(true);
@@ -54,20 +55,28 @@ export default function RegisterPage() {
   };
 
   return (
+    // Container do registro de usuario
     <div className={styles.container}>
       <ToastContainer />
+      {/*Card*/}
       <Card className={styles.card}>
+        {/*Header do card*/}
         <section className={styles.header}>
+          {/*Botão voltar*/}
           <div className={styles.imageLink}>
             <ButtonBack />
           </div>
+          {/*Cabeçalho do card*/}
           <CardHeader className={styles.headerCard}>
             <CardTitle className={styles.title}>Registrar</CardTitle>
           </CardHeader>
         </section>
+        {/*Conteudo do card*/}
         <CardContent className={styles.contantCard}>
+          {/*Forms*/}
           <Form {...form}>
             <form className={styles.form} onSubmit={form.handleSubmit(onSubmit)}>
+              {/*Campo nome*/}
               <FormField
                 control={form.control}
                 name="nome"
@@ -82,6 +91,7 @@ export default function RegisterPage() {
                 )}
               />
 
+              {/*Campo email*/}
               <FormField
                 control={form.control}
                 name="email"
@@ -96,6 +106,7 @@ export default function RegisterPage() {
                 )}
               />
 
+              {/*Campo senha*/}
               <FormField
                 control={form.control}
                 name="senha"
@@ -110,6 +121,7 @@ export default function RegisterPage() {
                 )}
               />
 
+              {/*Campo ativo*/}
               <FormField
                 control={form.control}
                 name="ativo"
@@ -123,6 +135,7 @@ export default function RegisterPage() {
                 )}
               />
 
+              {/*Campo role*/}
               <FormField
                 control={form.control}
                 name="role"
@@ -145,6 +158,7 @@ export default function RegisterPage() {
                 )}
               />
 
+              {/*Botão Submit*/}
               <Button type="submit" disabled={isSubmitting} className={styles.buttonSubmit}>
                 {isSubmitting ? "Cadastrando..." : "Cadastrar"}
               </Button>

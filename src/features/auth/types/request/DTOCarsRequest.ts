@@ -1,5 +1,6 @@
 import { UUID } from "crypto";
 
+// DTO de carro
 export interface Car {
     id: UUID;
     modelo: string;

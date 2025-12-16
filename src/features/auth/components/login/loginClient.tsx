@@ -20,29 +20,30 @@ import { schemaLogin } from "@/features/auth/schemas/schemaLogin";
 import { useRouter } from "next/navigation";
 import { z } from "zod"
 
-// inferimos o tipo a partir do Zod
+// Inferindo o esquema
 type FormValues = z.infer<typeof schemaLogin>;
 
 export default function Login() {
     const router = useRouter();
     const [errorMessage, setErrorMessage] = useState("");
 
-    // tipamos o useForm com FormValues
+    // Informando o forms os valores padrões e as validações
     const form = useForm<FormValues>({
         resolver: zodResolver(schemaLogin),
         defaultValues: {
             email: "",
-            password: "",
+            senha: "",
         },
     });
 
+    // Submetendo o forms
     async function onSubmit(values: FormValues) {
         setErrorMessage("");
 
         const res = await signIn("credentials", {
             redirect: false,
             email: values.email,
-            password: values.password,
+            password: values.senha,
         });
 
         if (res?.error) {
@@ -50,17 +51,19 @@ export default function Login() {
             return;
         }
 
-        router.push("/cars"); //Redireciona após login bem-sucedido
+        router.push("/cars");
         router.refresh();
     }
 
-    // Login via Auth0
-    const handleAuth0Login = () => {
-        signIn("auth0", { callbackUrl: "/cars" });
+    // Login
+    const handleLogin = () => {
+        signIn();
     };
 
     return (
+        // Container do login de usuario
         <div className={styles.container}>
+            {/*Card*/}
             <Card className={styles.card}>
                 <h1>Login</h1>
 
@@ -68,9 +71,11 @@ export default function Login() {
                     <p className="text-red-500">{errorMessage}</p>
                 )}
 
+                {/*Forms*/}
                 <Form {...form}>
                     <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-4">
 
+                        {/*Campo email*/}
                         <FormField
                             control={form.control}
                             name="email"
@@ -85,9 +90,10 @@ export default function Login() {
                             )}
                         />
 
+                        {/*Campo senha*/}
                         <FormField
                             control={form.control}
-                            name="password"
+                            name="senha"
                             render={({ field }) => (
                                 <FormItem className={styles.field}>
                                     <FormLabel className={styles.label}>Senha:</FormLabel>
@@ -99,8 +105,9 @@ export default function Login() {
                             )}
                         />
 
+                        {/*Botão submit*/}
                         <Button type="submit" className={styles.buttonSubmit}
-                        onClick={handleAuth0Login}>
+                        onClick={handleLogin}>
                             Entrar
                         </Button>
 
