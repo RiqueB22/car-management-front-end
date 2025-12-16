@@ -7,8 +7,9 @@ export default async function Page() {
   // Busca a sessão no servidor
   const session = await getServerSession(authOptions);
 
+  // Se já estiver logado, redireciona para tabela
   if (session?.user) {
-    redirect("/");
+    redirect("/cars");
   }
 
   // Retorna a pagina Registro de usuario

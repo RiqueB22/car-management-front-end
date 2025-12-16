@@ -41,7 +41,7 @@ export default function Login() {
         setErrorMessage("");
 
         const res = await signIn("credentials", {
-            redirect: false,
+            redirect: true,
             email: values.email,
             password: values.senha,
         });
