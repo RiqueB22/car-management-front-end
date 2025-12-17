@@ -24,6 +24,7 @@ import ButtonBack from "../../../../components/buttonBack";
 import {useUpdateCar} from "@/features/editCar/hooks/useUpdateCar";
 import FormContainer from "@/components/formContainer";
 import FormCard from "@/components/formCard";
+import FormHeader from "@/components/formHeader";
 
 // Inferindo o esquema
 type CarFormData = z.infer<typeof SchemaEditCar>;
@@ -57,7 +58,7 @@ export default function CarEditPage({ Data, session }: CarEditPageProps) {
       {/*Card*/}
       <FormCard>
         {/*Header do card*/}
-        <section className={styles.header}>
+        <FormHeader>
           {/*Botão voltar*/}
           <div className={styles.imageLink}>
             <ButtonBack />
@@ -66,7 +67,7 @@ export default function CarEditPage({ Data, session }: CarEditPageProps) {
           <CardHeader className={styles.headerCard}>
             <CardTitle className={styles.title}>Editar</CardTitle>
           </CardHeader>
-        </section>
+        </FormHeader>
         {/*Conteudo do card*/}
         <CardContent className={styles.contantCard}>
           {/*Forms*/}

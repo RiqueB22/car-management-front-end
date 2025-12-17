@@ -20,10 +20,11 @@ import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import "react-toastify/dist/ReactToastify.css";
-import Index from "../../../../components/buttonBack";
+import ButtonBack from "../../../../components/buttonBack";
 import useUser from "@/features/user/hooks/useUser";
 import UserContainer from "@/components/userContainer";
 import FormCard from "@/components/formCard";
+import FormHeader from "@/components/formHeader";
 
 // Inferindo o esquema
 type RegisterFormData = z.infer<typeof SchemaUser>;
@@ -49,16 +50,16 @@ export default function RegisterPage() {
             {/*Card*/}
             <FormCard>
                 {/*Header do card*/}
-                <section className={styles.header}>
+                <FormHeader>
                     {/*Botão voltar*/}
                     <div className={styles.imageLink}>
-                        <Index/>
+                        <ButtonBack/>
                     </div>
                     {/*Cabeçalho do card*/}
                     <CardHeader className={styles.headerCard}>
                         <CardTitle className={styles.title}>Registrar</CardTitle>
                     </CardHeader>
-                </section>
+                </FormHeader>
                 {/*Conteudo do card*/}
                 <CardContent className={styles.contantCard}>
                     {/*Forms*/}

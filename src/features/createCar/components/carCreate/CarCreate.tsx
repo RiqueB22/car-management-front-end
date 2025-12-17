@@ -24,6 +24,7 @@ import {SessionProps} from "@/features/searchCar/types/SessionProps";
 import {useCreateCar} from "@/features/createCar/hooks/useCreateCar";
 import FormContainer from "@/components/formContainer";
 import FormCard from "@/components/formCard";
+import FormHeader from "@/components/formHeader";
 
 // Inferindo o esquema
 type CarCreateFormData = z.infer<typeof SchemaCreateCar>;
@@ -57,7 +58,7 @@ export function CarCreatePage({session}: SessionProps) {
             {/*Card*/}
             <FormCard>
                 {/*Header do card*/}
-                <section className={styles.header}>
+                <FormHeader>
                     {/*Botão voltar*/}
                     <div className={styles.imageLink}>
                         <ButtonBack/>
@@ -66,7 +67,7 @@ export function CarCreatePage({session}: SessionProps) {
                     <CardHeader className={styles.headerCard}>
                         <CardTitle className={styles.title}>Criar</CardTitle>
                     </CardHeader>
-                </section>
+                </FormHeader>
                 {/*Conteudo do card*/}
                 <CardContent className={styles.contantCard}>
                     {/*Forms*/}
