@@ -18,10 +18,12 @@ import {
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import "react-toastify/dist/ReactToastify.css";
 import Index from "../../../../components/buttonBack";
 import useUser from "@/features/user/hooks/useUser";
+import UserContainer from "@/components/userContainer";
+import FormCard from "@/components/formCard";
 
 // Inferindo o esquema
 type RegisterFormData = z.infer<typeof SchemaUser>;
@@ -42,10 +44,10 @@ export default function RegisterPage() {
 
     return (
         // Container do registro de usuario
-        <div className={styles.container}>
+        <UserContainer>
             <ToastContainer/>
             {/*Card*/}
-            <Card className={styles.card}>
+            <FormCard>
                 {/*Header do card*/}
                 <section className={styles.header}>
                     {/*Botão voltar*/}
@@ -154,7 +156,7 @@ export default function RegisterPage() {
                         </form>
                     </Form>
                 </CardContent>
-            </Card>
-        </div>
+            </FormCard>
+        </UserContainer>
     );
 }

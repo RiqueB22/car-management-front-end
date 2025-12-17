@@ -16,12 +16,14 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import "react-toastify/dist/ReactToastify.css";
 import styles from "./style.module.css";
 import { CarEditPageProps } from "@/features/editCar/types/CarEditPageProps";
 import ButtonBack from "../../../../components/buttonBack";
 import {useUpdateCar} from "@/features/editCar/hooks/useUpdateCar";
+import FormContainer from "@/components/formContainer";
+import FormCard from "@/components/formCard";
 
 // Inferindo o esquema
 type CarFormData = z.infer<typeof SchemaEditCar>;
@@ -50,10 +52,10 @@ export default function CarEditPage({ Data, session }: CarEditPageProps) {
 
   return (
     // Container de edição de carro
-    <div className={styles.container}>
+    <FormContainer>
       <ToastContainer />
       {/*Card*/}
-      <Card className={styles.card}>
+      <FormCard>
         {/*Header do card*/}
         <section className={styles.header}>
           {/*Botão voltar*/}
@@ -151,7 +153,7 @@ export default function CarEditPage({ Data, session }: CarEditPageProps) {
             </form>
           </Form>
         </CardContent>
-      </Card>
-    </div>
+      </FormCard>
+    </FormContainer>
   );
 }

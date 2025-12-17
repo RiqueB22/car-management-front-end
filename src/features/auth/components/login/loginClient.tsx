@@ -19,6 +19,7 @@ import {
 import { schemaLogin } from "@/features/auth/schemas/schemaLogin";
 import { useRouter } from "next/navigation";
 import { z } from "zod"
+import UserContainer from "@/components/userContainer";
 
 // Inferindo o esquema
 type FormValues = z.infer<typeof schemaLogin>;
@@ -62,7 +63,7 @@ export default function Login() {
 
     return (
         // Container do login de usuario
-        <div className={styles.container}>
+        <UserContainer>
             {/*Card*/}
             <Card className={styles.card}>
                 <h1>Login</h1>
@@ -114,6 +115,6 @@ export default function Login() {
                     </form>
                 </Form>
             </Card>
-        </div>
+        </UserContainer>
     );
 }

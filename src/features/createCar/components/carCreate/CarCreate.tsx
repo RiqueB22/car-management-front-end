@@ -16,12 +16,14 @@ import {
 } from "@/components/ui/form";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import "react-toastify/dist/ReactToastify.css";
 import styles from "./styles.module.css";
 import ButtonBack from "../../../../components/buttonBack";
 import {SessionProps} from "@/features/searchCar/types/SessionProps";
 import {useCreateCar} from "@/features/createCar/hooks/useCreateCar";
+import FormContainer from "@/components/formContainer";
+import FormCard from "@/components/formCard";
 
 // Inferindo o esquema
 type CarCreateFormData = z.infer<typeof SchemaCreateCar>;
@@ -50,10 +52,10 @@ export function CarCreatePage({session}: SessionProps) {
 
     return (
         // Container de criação de carro
-        <div className={styles.container}>
+        <FormContainer>
             <ToastContainer />
             {/*Card*/}
-            <Card className={styles.card}>
+            <FormCard>
                 {/*Header do card*/}
                 <section className={styles.header}>
                     {/*Botão voltar*/}
@@ -159,7 +161,7 @@ export function CarCreatePage({session}: SessionProps) {
                         </form>
                     </Form>
                 </CardContent>
-            </Card>
-        </div>
+            </FormCard>
+        </FormContainer>
     );
 }
