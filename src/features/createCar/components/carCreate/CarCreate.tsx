@@ -1,0 +1,165 @@
+'use client';
+
+import * as z from "zod";
+import { SchemaCreateCar } from "../../schemas/schemaCreateCar";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { useForm } from "react-hook-form";
+import { ToastContainer } from "react-toastify";
+import { Checkbox } from "@/components/ui/checkbox";
+import {
+    Form,
+    FormControl,
+    FormField,
+    FormItem,
+    FormLabel,
+    FormMessage,
+} from "@/components/ui/form";
+import { Input } from "@/components/ui/input";
+import { Button } from "@/components/ui/button";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import "react-toastify/dist/ReactToastify.css";
+import styles from "./styles.module.css";
+import ButtonBack from "../../../../components/buttonBack";
+import {SessionProps} from "@/features/searchCar/types/SessionProps";
+import {useCreateCar} from "@/features/createCar/hooks/useCreateCar";
+
+// Inferindo o esquema
+type CarCreateFormData = z.infer<typeof SchemaCreateCar>;
+
+export function CarCreatePage({session}: SessionProps) {
+
+    // informando valores padrões e validações
+    const form = useForm<CarCreateFormData>({
+        resolver: zodResolver(SchemaCreateCar),
+        defaultValues: {
+            modelo: "",
+            marca: "",
+            cor: "",
+            ano: new Date().getFullYear(),
+            ativo: true
+        }
+    });
+
+    // Registra um novo carro
+    const mutation = useCreateCar(session);
+
+    //Submetendo o forms
+    const onSubmit = async (values: CarCreateFormData) => {
+        mutation.mutate(values);
+    };
+
+    return (
+        // Container de criação de carro
+        <div className={styles.container}>
+            <ToastContainer />
+            {/*Card*/}
+            <Card className={styles.card}>
+                {/*Header do card*/}
+                <section className={styles.header}>
+                    {/*Botão voltar*/}
+                    <div className={styles.imageLink}>
+                        <ButtonBack/>
+                    </div>
+                    {/*Cabeçalho*/}
+                    <CardHeader className={styles.headerCard}>
+                        <CardTitle className={styles.title}>Criar</CardTitle>
+                    </CardHeader>
+                </section>
+                {/*Conteudo do card*/}
+                <CardContent className={styles.contantCard}>
+                    {/*Forms*/}
+                    <Form {...form}>
+                        <form className={styles.form} onSubmit={form.handleSubmit(onSubmit)}>
+                            {/*Campo modelo*/}
+                            <FormField
+                                control={form.control}
+                                name="modelo"
+                                render={({field}) => (
+                                    <FormItem className={styles.field}>
+                                        <FormLabel>Modelo:</FormLabel>
+                                        <FormControl>
+                                            <Input className={styles.input} type="text"
+                                                   placeholder="seu modelo" {...field} value={field.value ?? ""}/>
+                                        </FormControl>
+                                        <FormMessage/>
+                                    </FormItem>
+                                )}
+                            />
+
+                            {/*Campo marca*/}
+                            <FormField
+                                control={form.control}
+                                name="marca"
+                                render={({field}) => (
+                                    <FormItem className={styles.field}>
+                                        <FormLabel>Marca:</FormLabel>
+                                        <FormControl>
+                                            <Input className={styles.input} type="text"
+                                                   placeholder="sua marca" {...field} value={field.value ?? ""}/>
+                                        </FormControl>
+                                        <FormMessage/>
+                                    </FormItem>
+                                )}
+                            />
+
+                            {/*Campo cor*/}
+                            <FormField
+                                control={form.control}
+                                name="cor"
+                                render={({field}) => (
+                                    <FormItem className={styles.field}>
+                                        <FormLabel>Cor:</FormLabel>
+                                        <FormControl>
+                                            <Input className={styles.input} type="text" placeholder="sua cor" {...field}
+                                                   value={field.value ?? ""}/>
+                                        </FormControl>
+                                        <FormMessage/>
+                                    </FormItem>
+                                )}
+                            />
+
+                            {/*Campo ano*/}
+                            <FormField
+                                control={form.control}
+                                name="ano"
+                                render={({field}) => (
+                                    <FormItem className={styles.field}>
+                                        <FormLabel>Ano:</FormLabel>
+                                        <FormControl>
+                                            <Input className={styles.input} type="number"
+                                                   placeholder="seu ano" {...field} value={field.value} onChange={(e) =>
+                                                field.onChange(
+                                                    e.target.value === "" ? undefined : Number(e.target.value)
+                                                )
+                                            }/>
+                                        </FormControl>
+                                        <FormMessage/>
+                                    </FormItem>
+                                )}
+                            />
+
+                            {/*Campo ativo*/}
+                            <FormField
+                                control={form.control}
+                                name="ativo"
+                                render={({field}) => (
+                                    <FormItem className="flex flex-row items-center space-x-2">
+                                        <FormControl>
+                                            <Checkbox checked={!!field.value} onCheckedChange={field.onChange}/>
+                                        </FormControl>
+                                        <FormLabel>Ativo</FormLabel>
+                                    </FormItem>
+                                )}
+                            />
+
+                            {/*Botão submit*/}
+                            <Button type="submit" disabled={mutation.isPending} className={styles.buttonSubmit}>
+                                {mutation.isPending ? "Registrando..." : "Registrar"}
+                            </Button>
+                        </form>
+                    </Form>
+                </CardContent>
+            </Card>
+        </div>
+    );
+}

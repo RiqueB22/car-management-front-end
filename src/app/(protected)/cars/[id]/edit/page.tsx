@@ -1,8 +1,8 @@
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { authOptions } from "../../../../api/auth/[...nextauth]/route";
-import fetchCar from "@/features/auth/actions/GetCarbyId";
-import CarEditPage from "@/features/auth/components/carEdit/CarEditClient";
+import fetchCar from "@/features/getByIdCar/actions/GetCarbyId";
+import CarEditPage from "@/features/editCar/components/carEdit/CarEditClient";
 
 interface PageProps {
   params: { id: string };

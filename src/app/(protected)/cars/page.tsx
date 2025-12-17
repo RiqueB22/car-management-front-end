@@ -1,6 +1,6 @@
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
-import CarsClient from "@/features/auth/components/cars/CarsClient";
+import CarsClient from "@/features/searchCar/components/cars/CarsClient";
 import { authOptions } from "../../api/auth/[...nextauth]/route";
 
 export default async function Dashboard() {

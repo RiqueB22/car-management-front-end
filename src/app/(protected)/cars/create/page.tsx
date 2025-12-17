@@ -1,7 +1,7 @@
 import { getServerSession } from "next-auth";
 import { redirect } from "next/navigation";
 import { authOptions } from "../../../api/auth/[...nextauth]/route";
-import CarCreatePage from "@/features/auth/components/carCreate/CarCreate";
+import {CarCreatePage} from "@/features/createCar/components/carCreate/CarCreate";
 
 export default async function CreateCar() {
   // Busca a sessão no servidor
