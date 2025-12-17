@@ -53,7 +53,7 @@ export default function Header() {
                 ) : (
                     <>
                         {/*Se não estiver logado aparece os botões login e registro*/}
-                        <Button variant="link" className={styles.login} onClick={() => signIn()}>
+                        <Button variant="link" className={styles.login} onClick={() => signIn("credentials")}>
                             <Link href="/auth/login">
                                 Login
                             </Link>

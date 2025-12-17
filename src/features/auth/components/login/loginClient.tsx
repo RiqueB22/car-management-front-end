@@ -58,7 +58,7 @@ export default function Login() {
 
     // Login
     const handleLogin = () => {
-        signIn();
+        signIn("credentials");
     };
 
     return (

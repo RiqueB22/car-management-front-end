@@ -25,6 +25,7 @@ import useUser from "@/features/user/hooks/useUser";
 import UserContainer from "@/components/userContainer";
 import FormCard from "@/components/formCard";
 import FormHeader from "@/components/formHeader";
+import HeadCard from "@/components/headCard";
 
 // Inferindo o esquema
 type RegisterFormData = z.infer<typeof SchemaUser>;
@@ -52,13 +53,9 @@ export default function RegisterPage() {
                 {/*Header do card*/}
                 <FormHeader>
                     {/*Botão voltar*/}
-                    <div className={styles.imageLink}>
-                        <ButtonBack/>
-                    </div>
+                    <ButtonBack/>
                     {/*Cabeçalho do card*/}
-                    <CardHeader className={styles.headerCard}>
-                        <CardTitle className={styles.title}>Registrar</CardTitle>
-                    </CardHeader>
+                    <HeadCard title="Registrar" />
                 </FormHeader>
                 {/*Conteudo do card*/}
                 <CardContent className={styles.contantCard}>

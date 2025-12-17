@@ -15,8 +15,10 @@ export default function ButtonBack() {
 
     // Retorna botão voltar
     return (
-        <Button onClick={handleVoltar} className={styles.image}>
-            <Image src={leftarrow} width={20} height={20} alt="retorno" />
-        </Button>
+        <div className={styles.imageLink}>
+            <Button onClick={handleVoltar} className={styles.image}>
+                <Image src={leftarrow} width={20} height={20} alt="retorno" />
+            </Button>
+        </div>
     );
 }

@@ -1,3 +1,11 @@
+.imageLink{
+    display: flex;
+    width: 10%;
+    height: 100%;
+    align-items: center;
+    justify-content: center;
+}
+
 .image {
     display: flex;
     width: 30px;
